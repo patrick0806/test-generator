@@ -4,12 +4,11 @@ Gerador de provas (MVP): compose um exame com suporte a notação matemática e 
 
 ## Pré-requisitos
 
-Este projeto compila LaTeX para PDF no servidor e exige um motor LaTeX instalado na máquina:
+O PDF é gerado a partir de HTML por um navegador headless (Playwright + Chromium). Não há dependência de LaTeX/Tectonic/pdflatex.
 
-- **Tectonic** (padrão): instale com `curl -sSL https://drop-sh.fullyjustified.net | sh` e coloque o binário no `PATH`.
-- **pdflatex** (alternativa): instale via TeX Live (`sudo apt install texlive-full`).
+- **Chromium (Playwright)**: instale o navegador com `npx playwright-core install chromium`.
 
-O motor é selecionado pela variável de ambiente `LATEX_ENGINE` (padrão: `tectonic`). Se nenhum motor for encontrado, a rota `/api/pdf` responde `501` com instruções.
+Em ambientes serverless (ex.: Vercel), defina a variável de ambiente `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` apontando para o binário do Chromium fornecido pela plataforma. Localmente, o Playwright localiza o Chromium instalado acima automaticamente.
 
 ## Desenvolvimento
 

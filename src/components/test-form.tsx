@@ -1,12 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { useFieldArray, useForm } from "react-hook-form"
+import { useFieldArray, useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FileDownIcon, LoaderIcon, PlusIcon } from "lucide-react"
 
 import { testSchema, type TestInput } from "@/lib/schemas"
+import type { Test } from "@/types/test"
 import { QuestionForm } from "@/components/question-form"
+import { TestPreview } from "@/components/test-preview"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -50,6 +52,8 @@ export function TestForm() {
         name: "questions",
     })
 
+    const watched = useWatch({ control: form.control }) as Test
+
     async function onSubmit(values: TestInput) {
         setIsGenerating(true)
         setSubmitError(null)
@@ -87,10 +91,11 @@ export function TestForm() {
 
     return (
         <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
-            >
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)]">
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
+                >
                 <Card>
                     <CardHeader>
                         <CardTitle>Dados da prova</CardTitle>
@@ -184,7 +189,12 @@ export function TestForm() {
                         Gerar PDF
                     </Button>
                 </div>
-            </form>
+                </form>
+
+                <div className="lg:sticky lg:top-6 lg:self-start">
+                    <TestPreview test={watched} />
+                </div>
+            </div>
         </Form>
     )
 }
