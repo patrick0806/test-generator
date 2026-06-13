@@ -1,6 +1,7 @@
 import katex from "katex"
 
 import type { Test } from "@/types/test"
+import { renderStatementHtml } from "@/lib/statement"
 
 function escapeHtml(value: string): string {
     return value
@@ -49,7 +50,7 @@ export function renderPrintableMarkup(test: Test): string {
     const questions = test.questions
         .map((question) => {
             const statement =
-                renderMath(question.description) ||
+                renderStatementHtml(question.description) ||
                 `<span class="printable-test__empty">(sem enunciado)</span>`
 
             let body: string

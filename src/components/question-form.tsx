@@ -6,6 +6,7 @@ import { PlusIcon, Trash2Icon } from "lucide-react"
 
 import type { TestInput } from "@/lib/schemas"
 import { MathInput } from "@/components/math-input"
+import { StatementInput } from "@/components/statement-input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import {
@@ -59,7 +60,7 @@ export function QuestionForm({ index, onRemove }: QuestionFormProps) {
                     name={`questions.${index}.description`}
                     render={({ field, fieldState }) => (
                         <div className="space-y-1">
-                            <MathInput
+                            <StatementInput
                                 value={field.value}
                                 onChange={field.onChange}
                             />
