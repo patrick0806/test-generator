@@ -5,5 +5,6 @@ export type Test = {
     school: string;
     teacher: string;
     title: string;
+    date: string;
     questions: Question[];
 }
